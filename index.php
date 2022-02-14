@@ -52,10 +52,15 @@ $sf = new Genre('Science-fiction');
 $avt = new Genre('Aventure');
 $cmd = new Genre('Comédie');
 
-$jPark = new Film('Jurrassic Park', '1993-06-11', 128, $stevenSpiel, 'Les dinos go graou è_é.', $sf, $sNeill);
-$ouioui = new Film('oui oui', '1810-06-11', 10, $guyYves, 'haha les blagues ou quoi ???!!!.', $cmd, $kReeves);
+$jPark = new Film('Jurrassic Park', '1993-06-11', 128, $stevenSpiel, 'Les dinos go graou è_é.', $sf, [$encodeSN = serialize($sNeill), $encodeKR = serialize($kReeves)]);
+//$ouioui = new Film('oui oui', '1810-06-11', 10, $guyYves, 'haha les blagues ou quoi ???!!!.', $sf, [strval($mMikkelsen), strval($kReeves)]);
 
-/*
-echo $neillS->showFilmo();
+// echo $sNeill.'<br>';
+// $encodeSN = serialize($sNeill);
+// echo $encodeSN.'decode<br>';
+// echo unserialize($encodeSN);
+
+echo $sNeill->showFilmo();
+echo $kReeves->showFilmo();
 echo $stevenSpiel->showReal();
-echo $sf->showGenre();*/
+echo $sf->showGenre();

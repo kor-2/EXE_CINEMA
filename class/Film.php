@@ -9,10 +9,10 @@ class Film{
     private Realisateur $_realisateur;
     private string $_resume;
     private Genre $_genre;
-    private Acteur $_acteur;
+    private array $_acteur;
     
 
-    public function __construct(string $titre,string $dateSortie, int $duree, Realisateur $realisateur, string $resume, Genre $genre, Acteur $acteur)
+    public function __construct(string $titre,string $dateSortie, int $duree, Realisateur $realisateur, string $resume, Genre $genre, array $acteur = [])
     {
         $this->_titre = $titre;
         $this->_dateSortie = new DateTime($dateSortie);
@@ -23,7 +23,11 @@ class Film{
         $this->_genre = $genre;
         $genre->ajoutGenre($this);
         $this->_acteur = $acteur;
-        $acteur->ajoutFilmographie($this);
+        foreach ($acteur as $act) {
+            $unserAct = unserialize($act,[true]);
+            $unserAct->ajoutFilmographie($this);
+        }
+        //$acteur->ajoutFilmographie($this);
     }
 
     public function __toString()

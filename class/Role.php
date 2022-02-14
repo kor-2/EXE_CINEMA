@@ -10,7 +10,7 @@ class Role
     {
         $this->_role = $role;
         $this->_film = $film;
-        $this->_acteur = $acteur;
+        $this->_acteur = [];
     }
 
     public function __toString()
