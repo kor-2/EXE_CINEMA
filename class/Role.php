@@ -3,19 +3,20 @@
 class Role
 {
     private string $_role ;
-    private Film $_film;
-    private Acteur $_acteur;
+    private array $_acteur;
 
-    public function __construct($role, $film)
+    public function __construct($role, array $acteur = [])
     {
         $this->_role = $role;
-        $this->_film = $film;
-        $this->_acteur = [];
+
+        $this->_acteur = $acteur;
     }
 
     public function __toString()
     {
-        return $this->get_role() .' '.$this->get_film().' '.$this->get_acteur();
+        
+        
+        return $this->get_role();
     }
 
     public function get_role()
@@ -30,17 +31,7 @@ class Role
         return $this;
     }
 
-    public function get_film()
-    {
-        return $this->_film;
-    }
-
-    public function set_film($film)
-    {
-        $this->_film = $film;
-
-        return $this;
-    }
+    
     public function get_acteur()
     {
         return $this->_acteur;
@@ -56,6 +47,14 @@ class Role
         array_push($this->_acteur,$acteur);
 
         return $this;
+    }
+    public function showRole(){
+        echo "<h4> Dans le role de $this</h4>";
+        echo "<ul>";
+        foreach ($this->_acteur as $act) {
+            echo " <li>$act</br>";
+        }
+        echo "</ul>";
     }
 
 }

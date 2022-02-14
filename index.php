@@ -53,14 +53,23 @@ $avt = new Genre('Aventure');
 $cmd = new Genre('Comédie');
 
 $jPark = new Film('Jurrassic Park', '1993-06-11', 128, $stevenSpiel, 'Les dinos go graou è_é.', $sf, [$encodeSN = serialize($sNeill), $encodeKR = serialize($kReeves)]);
-//$ouioui = new Film('oui oui', '1810-06-11', 10, $guyYves, 'haha les blagues ou quoi ???!!!.', $sf, [strval($mMikkelsen), strval($kReeves)]);
 
-// echo $sNeill.'<br>';
-// $encodeSN = serialize($sNeill);
-// echo $encodeSN.'decode<br>';
-// echo unserialize($encodeSN);
+$a1 = strval($sNeill);
+$a2 = strval($mMikkelsen);
+$DrGrant = new Role('Dr.Grant', [$a1, $a2]);
 
+echo $DrGrant->showRole();
 echo $sNeill->showFilmo();
 echo $kReeves->showFilmo();
 echo $stevenSpiel->showReal();
 echo $sf->showGenre();
+
+//$ouioui = new Film('oui oui', '1810-06-11', 10, $guyYves, 'haha les blagues ou quoi ???!!!.', $sf, [strval($mMikkelsen), strval($kReeves)]);
+/*
+echo $sNeill.'<br>';
+$encodeSN = serialize($sNeill);
+echo $encodeSN.'encode<br>';
+$unser = unserialize($encodeSN);
+echo "$unser <br>";
+echo gettype($unser);
+*/

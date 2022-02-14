@@ -24,7 +24,7 @@ class Film{
         $genre->ajoutGenre($this);
         $this->_acteur = $acteur;
         foreach ($acteur as $act) {
-            $unserAct = unserialize($act,[true]);
+            $unserAct = unserialize($act);
             $unserAct->ajoutFilmographie($this);
         }
         //$acteur->ajoutFilmographie($this);
