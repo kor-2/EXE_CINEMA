@@ -3,19 +3,16 @@
 class Role
 {
     private string $_role ;
-    private array $_acteur;
+    private array $_casting;
 
-    public function __construct($role, array $acteur = [])
+    public function __construct($role)
     {
         $this->_role = $role;
-
-        $this->_acteur = $acteur;
+        $this->_casting =[];
     }
 
     public function __toString()
     {
-        
-        
         return $this->get_role();
     }
 
@@ -43,18 +40,23 @@ class Role
 
         return $this;
     }
-    public function ajoutActeur($acteur){
-        array_push($this->_acteur,$acteur);
+    public function ajoutCasting($casting){
+        array_push($this->_casting,$casting);
 
         return $this;
     }
     public function showRole(){
-        echo "<h4> Dans le role de $this</h4>";
-        echo "<ul>";
-        foreach ($this->_acteur as $act) {
-            echo " <li>$act</br>";
+
+        echo "<div><div class=\"uk-card uk-card-secondary uk-card-hover uk-card-body \">";
+        echo "<h3 class=\"uk-card-title\">Dans le rôle de $this</h3>";
+        echo "<ul class=\"uk-list\">";
+        foreach ($this->_casting as $cast) {
+            echo " <li><i class=\"fa-solid fa-clapperboard fa-shake\"></i>".$cast->getActeur()  ."</br>";
+            
         }
-        echo "</ul>";
+        echo"</ul></div></div>";
+
+
     }
 
 }

@@ -1,0 +1,21 @@
+*{
+    box-sizing: border-box;
+}
+html,
+body{
+    font-size: 16px;
+    background-color: #999999;
+    color: white;
+}
+h1,
+h2,
+h3{
+    color: white;
+}
+.fa-clapperboard{
+    font-size: 0.75em;
+    margin-right: 1em;
+}
+.fa-video{
+    margin-right: 0.5em;
+}

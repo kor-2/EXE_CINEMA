@@ -1,6 +1,5 @@
+
 <?php
-
-
 
 class Film{
     private string $_titre;
@@ -9,10 +8,11 @@ class Film{
     private Realisateur $_realisateur;
     private string $_resume;
     private Genre $_genre;
-    private array $_acteur;
+    private array $_casting;
+
     
 
-    public function __construct(string $titre,string $dateSortie, int $duree, Realisateur $realisateur, string $resume, Genre $genre, array $acteur = [])
+    public function __construct(string $titre,string $dateSortie, int $duree, Realisateur $realisateur, string $resume, Genre $genre)
     {
         $this->_titre = $titre;
         $this->_dateSortie = new DateTime($dateSortie);
@@ -22,17 +22,13 @@ class Film{
         $this->_resume = $resume;
         $this->_genre = $genre;
         $genre->ajoutGenre($this);
-        $this->_acteur = $acteur;
-        foreach ($acteur as $act) {
-            $unserAct = unserialize($act);
-            $unserAct->ajoutFilmographie($this);
-        }
-        //$acteur->ajoutFilmographie($this);
+        $this->_casting =[];
     }
+
 
     public function __toString()
     {
-        return $this->get_titre() .' '. $this->get_dateSortie().' '.$this->get_duree().' '.$this->get_realisateur().' '.$this->get_resume().' '.$this->get_genre();
+        return $this->get_titre() .' sortie le '. $this->get_dateSortie().'. Il dure '.$this->get_duree().'. Résumé : '.$this->get_resume().' Genre : '.$this->get_genre();
     }
 
     public function get_titre()
@@ -49,7 +45,7 @@ class Film{
     
     public function get_dateSortie()
     {
-        return $this->_dateSortie->format('Y-m-d');
+        return $this->_dateSortie->format('d F Y');
     }
 
     public function set_dateSortie($dateSortie)
@@ -60,7 +56,16 @@ class Film{
     }
     public function get_duree()
     {
-        return "$this->_duree min";
+        $heure = floor($this->_duree /60);
+        $min = ($this->_duree % 60);
+        if ($heure != 0) {
+            return "$heure heures et $min minutes";
+        }else {
+            return "$min minutes";
+        }
+        
+        
+        
     }
 
     public function set_duree($duree)
@@ -107,24 +112,29 @@ class Film{
 
         return $this;
     }
-
-    public function get_acteur()
-    {
-        return $this->_acteur;
-    }
-
-    public function set_acteur($acteur)
-    {
-        $this->_acteur = $acteur;
+    public function ajoutCasting($casting){
+        array_push($this->_casting,$casting);
 
         return $this;
     }
-    public function getSortie()
-    {
-        $dateJour = new DateTime();
-        $date = $this->get_dateSortie();
-        $age = $dateJour->diff($date)->format('%y ans ');
 
-        return $age;
+    public function showCasting(){
+
+        echo "<div><div class=\"uk-card uk-card-secondary uk-card-hover uk-card-body \">";
+        echo "<h3 class=\"uk-card-title\">Casting de $this->_titre</h3>";
+        echo "<ul class=\"uk-list\">";
+        foreach ($this->_casting as $cast) {
+            echo " <li><i class=\"fa-solid fa-clapperboard fa-shake\"></i>$cast</br>";        
+        }       
+        echo"</ul></div></div>";
     }
+
 }
+
+
+
+
+
+
+
+

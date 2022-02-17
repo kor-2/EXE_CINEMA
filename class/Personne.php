@@ -17,7 +17,7 @@ class Personne
 
     public function __toString()
     {
-        return $this->get_nom().' '.$this->get_prenom().' '.$this->get_sexe().' '. $this->getAge();
+        return  $this->get_sexe().' '.$this->get_nom().' '.$this->get_prenom().' '. $this->getAge();
     }
 
    
@@ -76,91 +76,4 @@ class Personne
 
         return $age;
     }
-}
-class Acteur extends Personne
-{
-    
-    private array $_filmographies;
-
-    public function __construct($nom,$prenom,$sexe,$dateBD)
-    {
-        parent::__construct($nom,$prenom,$sexe,$dateBD);
-        $this->_filmographies = [];
-
-    }
-    
-    public function __toString()
-    {
-        return $this->get_nom().' '.$this->get_prenom().' '. $this->getAge();
-    }
-
-        public function get_filmographies()
-        {
-                return $this->_filmographies;
-        }
-
-        public function set_filmographies($filmographies)
-        {
-                $this->_filmographies = $filmographies;
-
-                return $this;
-        }
-
-        public function ajoutFilmographie($filmographies){
-
-            array_push($this->_filmographies,$filmographies);
-    
-            return $this;
-        }
-        public function showFilmo(){
-            echo "<h4> Filmographie de $this</h4>";
-            echo "<ul>";
-            foreach ($this->_filmographies as $filmo) {
-                echo " <li>$filmo</br>";
-            }
-            echo "</ul>";
-        }
-
-
-}
-class Realisateur extends Personne
-{
-    
-    private array $_realisation;
-
-    public function __construct($nom,$prenom,$sexe,$dateBD)
-    {
-        parent::__construct($nom,$prenom,$sexe,$dateBD);
-        $this->_realisation = [];
-    }
-    public function __toString()
-    {
-        return $this->get_nom().' '.$this->get_prenom().' '.$this->get_sexe().' '. $this->getAge();
-    }
-
-    public function get_realisation()
-    {
-        return $this->_realisation;
-    }
-
-    public function set_realisation($_realisation)
-    {
-        $this->_realisation = $_realisation;
-        return $this;
-    }
-    public function ajoutRealisation($realisation){
-        array_push($this->_realisation,$realisation);
-
-        return $this;
-    }
-    public function showReal(){
-        echo "<h4> Réalisation de $this</h4>";
-        echo "<ul>";
-        foreach ($this->_realisation as $real) {
-            echo " <li>$real</br>";
-        }
-        echo "</ul>";
-    }
-
-    
 }

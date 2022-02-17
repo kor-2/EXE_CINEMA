@@ -10,6 +10,7 @@ class Genre {
     }
 
     public function __toString(){
+
         return $this->get_genre();
     }
 
@@ -31,7 +32,6 @@ class Genre {
         return $this;
     }
 
-
     public function get_films()
     {
         return $this->_films;
@@ -44,12 +44,15 @@ class Genre {
         return $this;
     }
     public function showGenre(){
-        echo "<h4> Films de $this</h4>";
-        echo "<ul>";
+
+
+        echo "<div><div class=\"uk-card uk-card-secondary uk-card-hover uk-card-body \">";
+        echo "<h3 class=\"uk-card-title\">Films de $this</h3>";
+        echo "<ul class=\"uk-list\">";
         foreach ($this->_films as $film) {
-            echo " <li>$film</br>";
-        }
-        echo "</ul>";
+            echo " <li><i class=\"fa-solid fa-clapperboard fa-shake\"></i>".$film->get_titre()." sortie  le". $film->get_dateSortie()." Il dure ". $film->get_duree().". Résumé : ". $film->get_resume()."</li>";        }       
+        echo"</ul></div></div>";
+
     }
     public function ajoutGenre($films){
 
