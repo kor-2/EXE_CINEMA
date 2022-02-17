@@ -50,7 +50,8 @@ class Genre {
         echo "<h3 class=\"uk-card-title\">Films de $this</h3>";
         echo "<ul class=\"uk-list\">";
         foreach ($this->_films as $film) {
-            echo " <li><i class=\"fa-solid fa-clapperboard fa-shake\"></i>".$film->get_titre()." sortie  le". $film->get_dateSortie()." Il dure ". $film->get_duree().". Résumé : ". $film->get_resume()."</li>";        }       
+            echo " <li><i class=\"fa-solid fa-clapperboard fa-shake\"></i>".$film->get_titre()." sortie  le ". $film->get_dateSortie()." Il dure ". $film->get_duree().". Résumé : ". $film->get_resume()."</li>";        
+        }       
         echo"</ul></div></div>";
 
     }

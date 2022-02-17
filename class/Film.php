@@ -56,16 +56,12 @@ class Film{
     }
     public function get_duree()
     {
-        $heure = floor($this->_duree /60);
-        $min = ($this->_duree % 60);
-        if ($heure != 0) {
-            return "$heure heures et $min minutes";
+
+        if ($this->_duree > 60) {
+            return strftime('%H heures %M minutes' ,mktime(0,$this->_duree));
         }else {
-            return "$min minutes";
+            return strftime('%M minutes' ,mktime(0,$this->_duree));
         }
-        
-        
-        
     }
 
     public function set_duree($duree)

@@ -15,7 +15,7 @@
 
 
     <header class="uk-margin-large-top">
-        <h1 class="uk-heading-divider"> <i class="fa-solid fa-film fa-bounce"></i></i> POO Cinema</h1>
+        <h1 class="uk-heading-divider uk-text-center"> <i class="fa-solid fa-film fa-bounce"></i></i> POO Cinema <i class="fa-solid fa-film fa-bounce"></i></i></h1>
     </header>
 
 
@@ -53,6 +53,8 @@
             <li>Lister la filmographie d'un réalisateur (quels sont les films qu'a réalisé ce réalisateur ?)</li>
         </ul>
 
+        <h2 class="uk-heading-divider uk-text-center"> <i class="fa-solid fa-hands-asl-interpreting fa-spin"></i> Resultat <i class="fa-solid fa-hands-asl-interpreting fa-spin"></i></h2>
+
         <?php
 
         spl_autoload_register(function ($class_name) {
@@ -87,7 +89,7 @@
         $c1 = new Casting($DrGrant, $sNeill, $jPark);
         $c2 = new Casting($DrGrant, $kReeves, $jPark);
         $c3 = new Casting($superMan, $mMikkelsen, $ouioui);
-        $c3 = new Casting($guigou, $mMikkelsen, $nonnon);
+        $c3 = new Casting($guigou, $mMikkelsen, $kiddo);
 
 
 
@@ -129,6 +131,8 @@
             <div class="uk-child-width-1-2@s uk-grid-match" uk-grid>
                 <?php
                 $DrGrant->showRole();
+                $superMan->showRole();
+                $guigou->showRole();
                 ?>
             </div>
         </section>
@@ -137,6 +141,7 @@
             <div class="uk-child-width-1-2@s uk-grid-match" uk-grid>
                 <?php
                 $jPark->showCasting();
+                $kiddo->showCasting();
                 ?>
             </div>
         </section>

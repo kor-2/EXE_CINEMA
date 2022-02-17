@@ -52,7 +52,6 @@ class Role
         echo "<ul class=\"uk-list\">";
         foreach ($this->_casting as $cast) {
             echo " <li><i class=\"fa-solid fa-clapperboard fa-shake\"></i>".$cast->getActeur()  ."</br>";
-            
         }
         echo"</ul></div></div>";
 
