@@ -15,7 +15,7 @@
 
 
     <header class="uk-margin-large-top">
-        <h1 class="uk-heading-divider uk-text-center"> <i class="fa-solid fa-film fa-bounce"></i></i> POO Cinema <i class="fa-solid fa-film fa-bounce"></i></i></h1>
+        <h1 class="uk-heading-divider uk-text-center"> <i class="fa-solid fa-film fa-bounce"></i></i> PDO Cinema <i class="fa-solid fa-film fa-bounce"></i></i></h1>
     </header>
 
 
@@ -23,128 +23,58 @@
 
 
         <p>
-            Vous avez en charge de gérer différentes entités autour de la thématique du cinéma. <br>
-            Les films seront identifiés par leur titre, leur date de sortie en France, leur durée (en minutes) ainsi que
-            leur réalisateur (unique, avec nom, prénom, sexe et date de naissance). Un résumé du film (synopsis)
-            pourra éventuellement être renseigné. Chaque film est caractérisé par un seul genre
-            cinématographique (science-fiction, aventure, action, ...). <br>
-            Votre application devra recenser également les acteurs de chacun des films. On désire connaître le
-            nom, le prénom, le sexe et la date de naissance de l’acteur ainsi que le rôle (nom du personnage) joué
-            par l’acteur dans le(s) film(s) concerné(s). <br>
-            Il serait intéressant d'utiliser la notion d'héritage entre classes dans cet exercice. A vous de savoir où
-            le mettre en place !
+            Je vous invite à aller voir ceci et à produire le même type de manipulations avec votre BDD cinéma par exemple :
         </p>
 
-        <h3>Attention!</h3>
 
         <ul>
-            <li>
-                Le rôle (par exemple "James Bond") ne doit être instancié qu'une seule fois (dans la mesure où
-                e rôle a été incarné par plusieurs acteurs)
-            </li>
-        </ul>
-        <p>On doit pouvoir</p>
-
-        <ul>
-            <li>Lister la liste des acteurs ayant incarné tel rôle</li>
-            <li>Lister le casting d'un film (Dans Star Wars, Han Solo a été incarné par Harison Ford, Luke Skywalker a été incarné par Mark Hamill, ...)</li>
-            <li>Lister les films par genre (exemple : dans le genre SF il y a X films : Star Wars, Blade Runner, ...)</li>
-            <li>Lister la filmographie d'un acteur (dans quels films a-t-il joué ?)</li>
-            <li>Lister la filmographie d'un réalisateur (quels sont les films qu'a réalisé ce réalisateur ?)</li>
+            <li>afficher la liste des films</li>
+            <li>afficher le détail d'un film</li>
+            <li>afficher la liste des réalisateurs</li>
+            <li>afficher le détail d'un réalisateur (avec sa filmographie)</li>
         </ul>
 
         <h2 class="uk-heading-divider uk-text-center"> <i class="fa-solid fa-hands-asl-interpreting fa-spin"></i> Resultat <i class="fa-solid fa-hands-asl-interpreting fa-spin"></i></h2>
 
         <?php
+        function formaterDateFr(string $date)
+        {
+            $d = new DateTime($date);
+            $day = datefmt_create('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
 
-        spl_autoload_register(function ($class_name) {
-            require 'class/' . $class_name . '.php';
-        });
+            return datefmt_format($day, $d);
+        }
 
+        require 'config/connect.php';
+        /* ------AFFICHAGE FILMS------ */
+        echo '<h3> Liste des films </h3>';
+        foreach ($films as $film) {
+            echo '<p>'.$film['titre'].' sortie en '.$film['sortie'].' il dure '.$film['duree'].' il est noté '.$film['note'].'/5 </p>';
+        }
+        /* ------AFFICHAGE D'UN FILM------ */
 
-        $sNeill = new Acteur('Neill', 'Sam', 'M', '1947-08-14');
-        $kReeves = new Acteur('Reeves', 'Keanu', 'M', '1960-01-26');
-        $mMikkelsen = new Acteur('Mikkelsen', 'Mads', 'M', '1970-05-20');
-        $mMarvin = new Acteur('Scribe', 'Marvin', 'M', '2000-06-27');
-        $mMartin = new Acteur('King', 'Martin', 'M', '1999-01-10');
+        echo '<h3> Détails d\'un film </h3>';
 
-        $stevenSpiel = new Realisateur('Speilberg', 'Steven', 'M', '1946-12-18');
-        $guyYves = new Realisateur('Guy', 'Yves', 'M', '1900-02-08');
-        $baboFabrice = new Realisateur('Babo', 'Fabrice', 'M', '1990-02-08');
+        foreach ($detFilms as $detFilm) {
+            echo '<p>'.$detFilm['titre'].' sortie en '.$detFilm['sortie'].' il dure '.$detFilm['duree'].' il est réalisé par '.$detFilm['prenom'].' '.$detFilm['nom'].'</p>';
+        }
 
-        $sf = new Genre('Science-fiction');
-        $avt = new Genre('Aventure');
-        $cmd = new Genre('Comédie');
-        $drame = new Genre('drame');
+        echo '<h3> Liste des réalisateurs </h3>';
 
-        $jPark = new Film('Jurrassic Park', '1993-06-11', 128, $stevenSpiel, 'Les dinos go graou è_é.', $sf);
-        $ouioui = new Film('Oui oui', '1810-06-11', 10, $stevenSpiel, 'haha les blagues ou quoi ???!!!.', $cmd);
-        $nonnon = new Film('Non Non', '2010-06-11', 20, $baboFabrice, 'aie coup dur pour Guilllaume :/ .', $drame);
-        $kiddo = new Film('King Kiddo', '2022-01-11', 20, $baboFabrice, 'La cafete du cora.', $drame);
+        foreach ($realisateurs as $real) {
+            echo '<p>'.$real['prenom'].' '.$real['nom'].' né le '.formaterDateFr($real['bd_date']).'</p>';
+        }
 
-        $DrGrant = new Role('Dr.Grant');
-        $superMan = new Role('Superman');
-        $guigou = new Role('Guigou');
+        echo '<h3> Détails d\'un réalisateurs </h3>';
 
-        $c1 = new Casting($DrGrant, $sNeill, $jPark);
-        $c2 = new Casting($DrGrant, $kReeves, $jPark);
-        $c3 = new Casting($superMan, $mMikkelsen, $ouioui);
-        $c3 = new Casting($guigou, $mMikkelsen, $kiddo);
-
-
-
-
-
+        echo '<h4> Réalisateur avec l\'id => 1</h4>';
+        foreach ($detReals as $real) {
+            echo '<p>'.$real['titre'].' '.$real['date_'].'</p>';
+        }
 
         ?>
-
-        <section>
-            <h2 class="uk-margin-medium-top"><i class="fa-solid fa-video fa-beat-fade"></i>Réalisateur</h2>
-            <div class="uk-child-width-1-2@s uk-grid-match" uk-grid>
-                <?php
-                $stevenSpiel->showReal();
-                $baboFabrice->showReal();
-                ?>
-            </div>
-        </section>
-
-        <section>
-            <h2 class="uk-margin-medium-top"><i class="fa-solid fa-video fa-beat-fade"></i>Acteur</h2>
-            <div class="uk-child-width-1-2@s uk-grid-match" uk-grid>
-                <?php
-                $mMikkelsen->showFilmo();
-                $sNeill->showFilmo();
-                ?>
-            </div>
-        </section>
-        <section>
-            <h2 class="uk-margin-medium-top"><i class="fa-solid fa-video fa-beat-fade"></i>Genre</h2>
-            <div class="uk-child-width-1-2@s uk-grid-match" uk-grid>
-                <?php
-                $sf->showGenre();
-                $drame->showGenre();
-                ?>
-            </div>
-        </section>
-        <section>
-            <h2 class="uk-margin-medium-top"><i class="fa-solid fa-video fa-beat-fade"></i>Rôle</h2>
-            <div class="uk-child-width-1-2@s uk-grid-match" uk-grid>
-                <?php
-                $DrGrant->showRole();
-                $superMan->showRole();
-                $guigou->showRole();
-                ?>
-            </div>
-        </section>
-        <section>
-            <h2 class="uk-margin-medium-top"><i class="fa-solid fa-video fa-beat-fade"></i>Casting</h2>
-            <div class="uk-child-width-1-2@s uk-grid-match" uk-grid>
-                <?php
-                $jPark->showCasting();
-                $kiddo->showCasting();
-                ?>
-            </div>
-        </section>
+        
+       
 
 
 
