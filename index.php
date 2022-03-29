@@ -1,3 +1,7 @@
+<?php
+require 'config/querys.php';
+require 'config/functions.php';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -37,15 +41,7 @@
         <h2 class="uk-heading-divider uk-text-center"> <i class="fa-solid fa-hands-asl-interpreting fa-spin"></i> Resultat <i class="fa-solid fa-hands-asl-interpreting fa-spin"></i></h2>
 
         <?php
-        function formaterDateFr(string $date)
-        {
-            $d = new DateTime($date);
-            $day = datefmt_create('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
 
-            return datefmt_format($day, $d);
-        }
-
-        require 'config/connect.php';
         /* ------AFFICHAGE FILMS------ */
         echo '<h3> Liste des films </h3>';
         foreach ($films as $film) {
@@ -65,19 +61,13 @@
             echo '<p>'.$real['prenom'].' '.$real['nom'].' né le '.formaterDateFr($real['bd_date']).'</p>';
         }
 
-        echo '<h3> Détails d\'un réalisateurs </h3>';
-
-        echo '<h4> Réalisateur avec l\'id => 1</h4>';
+        echo '<h3> Réalisateur avec filmographie</h3>';
         foreach ($detReals as $real) {
-            echo '<p>'.$real['titre'].' '.$real['date_'].'</p>';
+            echo '<p>'.$real['nom'].' né le '.formaterDateFr($real['bd_date']).' à réalisé '.$real['titre'].' de '.$real['date_'].'</p>';
         }
 
         ?>
         
-       
-
-
-
 
     </main>
 
